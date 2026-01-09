@@ -1,0 +1,19 @@
+export(
+"predict_sff_qr",
+"predict_sffr2SLS",
+"sff_dgp",
+"sff_qr",
+"sffr_pen2SLS"
+)
+
+
+import(fda)
+import(MASS)
+import(Matrix)
+import(matrixStats)
+import(quantreg)
+import(ald)
+
+importFrom("stats", "rnorm", "cov", "pnorm", "qnorm", "quantile", "fitted", "rbinom", "optim", "plogis")
+importFrom("methods", "as")
+
