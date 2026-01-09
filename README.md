@@ -51,7 +51,7 @@ Simulate 250 spatial units under heteroscedastic errors (Case 2)
 2. Fit a Spatial Quantile Regression Model
 Define evaluation grids
 
-        grid_pts <- seq(0, 1, length.out = 101) # [cite: 364]
+        grid_pts <- seq(0, 1, length.out = 101)
 
 Fit the median (tau = 0.5) spatial quantile model
 
@@ -68,7 +68,7 @@ Fit the median (tau = 0.5) spatial quantile model
 3. Prediction for New Spatial Units
 Generate new observations
 
-        test_data <- sff_dgp(n = 100, rf = 0.7) # [cite: 68]
+        test_data <- sff_dgp(n = 100, rf = 0.7)
 
 Predict functional responses incorporating spatial feedback
 
