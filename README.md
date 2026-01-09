@@ -26,68 +26,54 @@ You can install the development version of SpatialFoFReg from GitHub:
 
 📈 Core Functions
 Function	Description
-sffr_pen2SLS	
-
-Fits the penalized SFoFR model via the two-stage least-squares estimator.
-
-sff_qr	
-
-Performs penalized two-stage spatial function-on-function quantile regression.
-
-sff_dgp	
-
-Generates synthetic functional data from an SFOFR process under multiple error structures.
-
-predict_sffr2SLS	
-
-Produces out-of-sample predictions for fitted Pen2SLS models using a fixed-point solver.
-
-predict_sff_qr	
-
-Generates fitted values for new data from a previously estimated quantile IV model.
+sffr_pen2SLS: Fits the penalized SFoFR model via the two-stage least-squares estimator.
+sff_qr: Performs penalized two-stage spatial function-on-function quantile regression.
+sff_dgp: Generates synthetic functional data from an SFOFR process under multiple error structures.
+predict_sffr2SLS: Produces out-of-sample predictions for fitted Pen2SLS models using a fixed-point solver.
+predict_sff_qr: Generates fitted values for new data from a previously estimated quantile IV model.
 
 🧪 Simulation Scenarios
 
 The sff_dgp function allows for testing models under three distinct error mechanisms:
 
 Case "1": Homoscedastic Gaussian errors with constant variance.
-
 Case "2": Signal-dependent heteroscedastic Gaussian errors with upper-tail contamination.
-
 Case "3": Asymmetric Laplace Distribution (ALD) errors, introducing heavy tails and asymmetry.
 
 💻 Quick Start Example
 1. Generate Spatially Correlated Functional Data
 
-library(SpatialFoFReg)
+        library(SpatialFoFReg)
+Simulate 250 spatial units under heteroscedastic errors (Case 2)
 
-    Simulate 250 spatial units under heteroscedastic errors (Case 2)
-sim_data <- sff_dgp(n = 250, rf = 0.7, case = "2")
+        sim_data <- sff_dgp(n = 250, rf = 0.7, case = "2")
 
 2. Fit a Spatial Quantile Regression Model
+Define evaluation grids
 
-        Define evaluation grids
-grid_pts <- seq(0, 1, length.out = 101) # [cite: 364]
+        grid_pts <- seq(0, 1, length.out = 101) # [cite: 364]
 
-    Fit the median (tau = 0.5) spatial quantile model
-fit_qr <- sff_qr(
-  y = sim_data$Y, 
-  x = sim_data$X, 
-  W = sim_data$W,
-  gpy = grid_pts, 
-  gpx = grid_pts,
-  tau = 0.5,
-  BIC = TRUE
-)
+Fit the median (tau = 0.5) spatial quantile model
+
+    fit_qr <- sff_qr(
+      y = sim_data$Y, 
+      x = sim_data$X, 
+      W = sim_data$W,
+      gpy = grid_pts, 
+      gpx = grid_pts,
+      tau = 0.5,
+      BIC = TRUE
+    )
 
 3. Prediction for New Spatial Units
+Generate new observations
 
-        Generate new observations
-test_data <- sff_dgp(n = 100, rf = 0.7) # [cite: 68]
+        test_data <- sff_dgp(n = 100, rf = 0.7) # [cite: 68]
 
-      Predict functional responses incorporating spatial feedback
-preds <- predict_sff_qr(
-  object = fit_qr, 
-  xnew = test_data$X, 
-  Wnew = test_data$W
-)
+Predict functional responses incorporating spatial feedback
+
+    preds <- predict_sff_qr(
+      object = fit_qr, 
+      xnew = test_data$X, 
+      Wnew = test_data$W
+    )
