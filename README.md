@@ -21,8 +21,8 @@ Inference Tools: Support for percentile bootstrap confidence bands for surfaces 
 You can install the development version of SpatialFoFReg from GitHub:
 
     install.packages("devtools")
-library(devtools)
-install_github("UfukBeyaztas/SpatialFoFReg")
+    library(devtools)
+    install_github("UfukBeyaztas/SpatialFoFReg")
 
 📈 Core Functions
 Function	Description
