@@ -20,7 +20,7 @@ Inference Tools: Support for percentile bootstrap confidence bands for surfaces 
 
 You can install the development version of SpatialFoFReg from GitHub:
 
-# install.packages("devtools")
+    install.packages("devtools")
 library(devtools)
 install_github("UfukBeyaztas/SpatialFoFReg")
 
@@ -61,15 +61,15 @@ Case "3": Asymmetric Laplace Distribution (ALD) errors, introducing heavy tails 
 
 library(SpatialFoFReg)
 
-# Simulate 250 spatial units under heteroscedastic errors (Case 2)
+    Simulate 250 spatial units under heteroscedastic errors (Case 2)
 sim_data <- sff_dgp(n = 250, rf = 0.7, case = "2")
 
 2. Fit a Spatial Quantile Regression Model
 
-# Define evaluation grids
+        Define evaluation grids
 grid_pts <- seq(0, 1, length.out = 101) # [cite: 364]
 
-# Fit the median (tau = 0.5) spatial quantile model
+    Fit the median (tau = 0.5) spatial quantile model
 fit_qr <- sff_qr(
   y = sim_data$Y, 
   x = sim_data$X, 
@@ -82,10 +82,10 @@ fit_qr <- sff_qr(
 
 3. Prediction for New Spatial Units
 
-# Generate new observations
+        Generate new observations
 test_data <- sff_dgp(n = 100, rf = 0.7) # [cite: 68]
 
-# Predict functional responses incorporating spatial feedback
+      Predict functional responses incorporating spatial feedback
 preds <- predict_sff_qr(
   object = fit_qr, 
   xnew = test_data$X, 
