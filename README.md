@@ -61,14 +61,13 @@ Fit the median (tau = 0.5) spatial quantile model
       W = sim_data$W,
       gpy = grid_pts, 
       gpx = grid_pts,
-      tau = 0.5,
-      BIC = TRUE
+      tau = 0.5
     )
 
 3. Prediction for New Spatial Units
 Generate new observations
 
-        test_data <- sff_dgp(n = 100, rf = 0.7)
+        test_data <- sff_dgp(n = 100, rf = 0.7, case = "2")
 
 Predict functional responses incorporating spatial feedback
 
